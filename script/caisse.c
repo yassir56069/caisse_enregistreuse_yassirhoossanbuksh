@@ -207,8 +207,9 @@ int main()
     init_array(&reg, 5);         // Initialise to 5 elements
 
     double change = prompt_pay((gen_cash(1,2000) + gen_cents(2, 1)));
-    printf("\n\nChange: %.2f", change);
+    printf("\n\nChange: %.2f \n", change);
 
+    cash_adder(change, &reg);
 
     PrintReg(&reg);              // print out cash register contents
 
@@ -454,7 +455,7 @@ int main()
 
     double cash_adder( double n, struct CashStore *reg) 
     {
-        while( n >= Rs1 ) //still a value in notes 
+       while ( n > 0.04 ) // while n >= 5 cents
         {
 
             if ( n >= 2000 ) 
@@ -507,15 +508,30 @@ int main()
                 ins_notes_array(Rs5, reg);
                 n -= (Rs5 + .0);
             } 
-            else 
+            else if (n >= 1)
             {
                 ins_notes_array(Rs1, reg);
                 n -= (Rs1 + .0);
             }
+            else if (n >= 0.5) 
+            {
+                ins_cents_array(c50, reg);
+                n -= 0.50;
+            }
+            else if (n >= 0.2)
+            {
+                ins_cents_array(c20, reg);
+                n -= 0.20;
+            }
+            else 
+            {
+                ins_cents_array(c5, reg);
+                n -= 0.05;
+            }
         }
         return n;
     }
-
+    
 #pragma endregion
 
 #pragma endregion
