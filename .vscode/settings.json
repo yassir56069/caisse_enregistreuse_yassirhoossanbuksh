@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "menus.h": "c",
+        "windows.h": "c",
+        "stdlib.h": "c",
+        "math.h": "c"
+    }
+}
